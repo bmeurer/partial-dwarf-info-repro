@@ -10,20 +10,20 @@ have.
 
 This was only tested on Ubuntu / Debian. You'll need to make sure that you installed `clang-8` and `lld-8` packages, i.e.
 
-```
-$> sudo apt-get install clang-8 lld-8
+```console
+sudo apt-get install clang-8 lld-8
 ```
 
 Afterwards just build with
 
-```
-$> make
+```console
+make
 ```
 
 start the web server with
 
-```
-$> make start
+```console
+make start
 ```
 
 and point your browser to [`http://localhost:4000`](http://localhost:4000).
