@@ -6,6 +6,8 @@ case Chromium DevTools is going to silently step over all functions that don't
 have DWARF information, which is not the user experience that we would like to
 have.
 
+Issue: [chromium:1036283](https://crbug.com/1036283)
+
 ## Building
 
 This was only tested on Ubuntu / Debian. You'll need to make sure that you installed `clang-8` and `lld-8` packages, i.e.
