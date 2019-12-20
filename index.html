@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Reproduction case for partial DWARF information</title>
+  </head>
+  <body>
+  <h1>Reproduction case for partial DWARF information</h1>
+  <p>
+    This is a reproduction case for the problem of partial DWARF information, where
+    we only have debuginfo for a subset of the functions in a Wasm module. In this
+    case Chromium DevTools is going to silently step over all functions that don't
+    have DWARF information, which is not the user experience that we would like to
+    have.
+  </p>
+  <p>Steps to reproduce:</p>
+  <ul>
+    <li>Open Chromium DevTools</li>
+    <li>Reload this page</li>
+    <li>Locate <code>foo.c</code> in the <i>Sources</i> panel</li>
+    <li>Set a breakpoint in line 4 on the call to <code>bar()</code></li>
+    <li>Reload again and notice how the debugger stops on the breakpoint</li>
+    <li>Now hit <i>Step into next function call (F11)</i> and notice how the debugger doesn't stop in <code>bar</code> as expected, but steps over the call to <code>bar</code> and instead stops again on the <code>return</code> statement</li>
+  </ul>
+  <script>
+    WebAssembly.instantiateStreaming(fetch('index.wasm'))
+      .then(({instance: {exports: {foo}}}) => foo())
+      .catch(console.error);
+  </script>
+  </body>
+</html>
